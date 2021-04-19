@@ -1,10 +1,93 @@
 body {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #eaeaea;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+  outline: none;
+}
+
+#root,
+.container {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 100px;
+  box-shadow: 0 24px 12px #cfcfcf;
+  z-index: 10;
+}
+
+.form .form-field {
+  display: flex;
+  flex-direction: column;
+  min-height: 88px;
+}
+
+.form .form-field label {
+  margin: 0 0 5px 5px;
+}
+
+.form .form-field input {
+  border: 1px solid #808080;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.form .form-field input:focus {
+  border: 1px solid #1380b3;
+}
+
+.form .form-field p {
+  margin: 5px 0 0 5px;
+}
+
+.form .form-field.error {
+  color: #ff0000;
+}
+
+.form .form-field.error input {
+  border: 1px solid #ff0000;
+}
+
+.form .action-buttons {
+  text-align: right;
+}
+
+.form .action-buttons button {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.form .action-buttons button:first-child {
+  background-color: #1380b3;
+}
+
+.form .action-buttons button:last-child {
+  margin-left: 10px;
+  background-color: #15814b;
+}
+
+.form .action-buttons button:hover {
+  opacity: 0.9;
 }
