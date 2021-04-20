@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import fetchShortLink from '../utils/fetchShortLink';
+
 import Loading from './Loading';
+import fetchShortLink from '../utils/fetchShortLink';
 
 const LinkForm = ({ setShortLink }) => {
   const [link, setLink] = useState('');
@@ -44,6 +45,8 @@ const LinkForm = ({ setShortLink }) => {
     if (isValidLink) {
       const shortLink = await fetchShortLink(link);
       setShortLink(shortLink);
+    } else {
+      setShortLink('');
     }
 
     setIsSubmitting(false);

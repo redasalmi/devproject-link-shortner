@@ -107,3 +107,32 @@ button:disabled {
 .form .submit-btn button > div {
   padding-left: 5px;
 }
+
+.short-link > h4 {
+  margin-bottom: 10px;
+}
+
+.short-link > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.short-link > div > button {
+  position: relative;
+  padding: 12px;
+  min-width: 100px;
+  background-color: #15814b;
+}
+
+.short-link > div > button > .copied-msg {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  padding: 5px;
+  font-size: 10px;
+  background-color: #353535;
+  text-align: center;
+  width: 100%;
+  cursor: default;
+}
