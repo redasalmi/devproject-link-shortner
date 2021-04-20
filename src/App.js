@@ -2,16 +2,25 @@ import { useState } from 'react';
 
 const App = () => {
   const [link, setLink] = useState('');
-  const [invalidLink, setInvalidLink] = useState(false);
+  const [linkError, setLinkError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const formFieldClassname = `form-field ${invalidLink ? 'error' : ''}`.trim();
+  const formFieldClassname = `form-field ${linkError ? 'error' : ''}`.trim();
 
-  const linkVerification = (link) => {
-    const urlRegex = /[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/gi;
-    const isValidLink = link.match(urlRegex) !== null && link !== '';
+  const verifyLink = (link) => {
+    let linkError = '';
 
-    setInvalidLink(!isValidLink);
+    if (link === '') {
+      linkError = 'Required field';
+    } else {
+      const urlRegex = /[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/gi;
+      const validUrl = link.match(urlRegex) !== null;
+
+      linkError = validUrl ? '' : 'Please input a valid Url';
+    }
+
+    setLinkError(linkError);
+    const isValidLink = linkError === '';
 
     return isValidLink;
   };
@@ -20,15 +29,15 @@ const App = () => {
     const { value } = e.target;
     setLink(value);
 
-    if (invalidLink) {
-      linkVerification(value);
+    if (linkError) {
+      verifyLink(value);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const isValidLink = linkVerification(link);
+    const isValidLink = verifyLink(link);
 
     if (isValidLink) {
       console.log(link);
@@ -46,14 +55,10 @@ const App = () => {
           <div className={formFieldClassname}>
             <label htmlFor='link'>Link to Shorten</label>
             <input type='text' id='link' value={link} onChange={handleChange} />
-            {invalidLink && <p>Please input a valid Url</p>}
+            {linkError ? <p>{linkError}</p> : undefined}
           </div>
 
-          <div className='action-buttons'>
-            <button type='button' disabled={isSubmitting}>
-              Copy
-            </button>
-
+          <div className='submit-btn'>
             <button type='submit' disabled={isSubmitting}>
               Shorten
             </button>
